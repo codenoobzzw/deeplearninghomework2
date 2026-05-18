@@ -1,0 +1,42 @@
+# YOLOv8 experiment plan for Road Vehicle Images Dataset.
+# Adjust batch/epochs if your GPU memory is limited.
+experiments:
+  - name: 01_yolov8n_baseline
+    model: yolov8n.pt
+    epochs: 80
+    imgsz: 640
+    batch: 16
+    lr0: 0.01
+    lrf: 0.01
+    patience: 20
+    notes: Baseline YOLOv8n fine-tuning.
+
+  - name: 02_yolov8n_low_lr
+    model: yolov8n.pt
+    epochs: 80
+    imgsz: 640
+    batch: 16
+    lr0: 0.003
+    lrf: 0.01
+    patience: 20
+    notes: Lower initial learning rate.
+
+  - name: 03_yolov8n_more_epochs
+    model: yolov8n.pt
+    epochs: 120
+    imgsz: 640
+    batch: 16
+    lr0: 0.01
+    lrf: 0.01
+    patience: 30
+    notes: More epochs for convergence analysis.
+
+  - name: 04_yolov8s_baseline
+    model: yolov8s.pt
+    epochs: 80
+    imgsz: 640
+    batch: 8
+    lr0: 0.01
+    lrf: 0.01
+    patience: 20
+    notes: Larger model comparison if GPU memory permits.

@@ -1,0 +1,14 @@
+# Install CUDA-enabled PyTorch first according to your server CUDA/driver.
+# See README.md. Then install this file.
+ultralytics>=8.2.0
+opencv-python>=4.8.0
+numpy>=1.23
+pandas>=1.5
+matplotlib>=3.7
+pyyaml>=6.0
+tqdm>=4.65
+Pillow>=9.5
+scikit-learn>=1.2
+kaggle>=1.6.0
+wandb>=0.16.0
+swanlab>=0.4.0

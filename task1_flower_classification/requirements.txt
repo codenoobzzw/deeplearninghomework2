@@ -1,0 +1,14 @@
+# Install a CUDA-compatible torch/torchvision build for your server first if needed.
+# See README.md. The lines below work for many Linux GPU servers, but CUDA matching can vary.
+torch>=2.1
+torchvision>=0.16
+scipy>=1.10
+numpy>=1.23
+pandas>=1.5
+matplotlib>=3.7
+tqdm>=4.65
+PyYAML>=6.0
+tabulate>=0.9
+scikit-learn>=1.2
+wandb>=0.16
+swanlab>=0.4

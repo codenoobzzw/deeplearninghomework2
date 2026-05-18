@@ -1,0 +1,76 @@
+# Experiment plan for Task 1. Run with:
+#   python scripts/run_experiments.py --plan configs/experiment_plan.yaml --tracker wandb --wandb-mode offline --amp
+# For a quick server smoke test:
+#   python scripts/run_experiments.py --epochs-override 1 --batch-size-override 8 --tracker none --amp
+
+defaults:
+  epochs: 30
+  batch_size: 32
+  optimizer: adamw
+  scheduler: cosine
+  weight_decay: 0.0001
+  label_smoothing: 0.1
+  seed: 42
+  tracker: none
+  wandb_mode: offline
+  wandb_project: dl-hw2-task1-flowers102
+  swanlab_project: dl-hw2-task1-flowers102
+  patience: 0
+
+experiments:
+  # Baseline: ImageNet-pretrained ResNet-18; new fc head uses larger lr, backbone uses smaller lr.
+  - name: 01_baseline_resnet18_pretrained_lr1e3_1e4
+    model: resnet18
+    pretrained: true
+    lr_head: 0.001
+    lr_backbone: 0.0001
+
+  # Hyperparameter analysis: learning-rate combinations.
+  - name: 02_hparam_resnet18_pretrained_lr3e4_3e5
+    model: resnet18
+    pretrained: true
+    lr_head: 0.0003
+    lr_backbone: 0.00003
+
+  - name: 03_hparam_resnet18_pretrained_lr3e3_3e4
+    model: resnet18
+    pretrained: true
+    lr_head: 0.003
+    lr_backbone: 0.0003
+
+  # Hyperparameter analysis: more training epochs. Increase only if the first three runs are stable.
+  - name: 04_hparam_resnet18_pretrained_50ep
+    model: resnet18
+    pretrained: true
+    epochs: 50
+    lr_head: 0.001
+    lr_backbone: 0.0001
+
+  # Pretraining ablation: same architecture but all weights are randomly initialized.
+  - name: 05_ablation_resnet18_random_init
+    model: resnet18
+    pretrained: false
+    lr_head: 0.001
+    lr_backbone: 0.001
+    label_smoothing: 0.0
+
+  # Attention mechanism: manually modified ResNet with SE blocks.
+  - name: 06_attention_se_resnet18_pretrained
+    model: se_resnet18
+    pretrained: true
+    lr_head: 0.001
+    lr_backbone: 0.0001
+
+  # Attention mechanism: manually modified ResNet with CBAM blocks.
+  - name: 07_attention_cbam_resnet18_pretrained
+    model: cbam_resnet18
+    pretrained: true
+    lr_head: 0.001
+    lr_backbone: 0.0001
+
+  # Optional stronger backbone if GPU time allows.
+  - name: 08_optional_resnet34_pretrained
+    model: resnet34
+    pretrained: true
+    lr_head: 0.001
+    lr_backbone: 0.0001
