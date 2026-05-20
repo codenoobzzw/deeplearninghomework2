@@ -13,6 +13,7 @@ task1_flower_classification/
 
 task2_detection_tracking/
   Road Vehicle Images Dataset 上的 YOLOv8 检测训练、学校路口视频 tracking、越线计数、遮挡分析代码。
+  补充提交了老师要求的 YOLO 检测/跟踪/划线后视频：video/补充yolo视频吧.mp4。
 
 task3_unet_segmentation/
   Stanford Background Dataset 上从零实现 U-Net、Dice Loss、CE/Dice/CE+Dice 对比实验代码。
